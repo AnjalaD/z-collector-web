@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {
   collection,
@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "..";
+import Nav from "../components/Nav";
 
 export default function Project() {
   const { projectId } = useParams();
@@ -73,17 +74,25 @@ export default function Project() {
   console.log(rows);
 
   return (
-    <Container maxWidth="lg" sx={{ height: 700 }}>
-      <Typography variant="h5" align="center" fontWeight="bold" mb={4}>
-        Project: {project ? project.name : "..."}
-      </Typography>
-      {project && records && (
-        <DataGrid
-          columns={columns}
-          rows={rows}
-          components={{ Toolbar: GridToolbar }}
-        />
-      )}
-    </Container>
+    <Box
+      sx={{
+        minHeight: "100vh",
+      }}
+    >
+      <Nav />
+
+      <Container maxWidth="lg" sx={{ height: 700 }}>
+        <Typography variant="h5" align="center" fontWeight="bold" mb={4}>
+          Project: {project ? project.name : "..."}
+        </Typography>
+        {project && records && (
+          <DataGrid
+            columns={columns}
+            rows={rows}
+            components={{ Toolbar: GridToolbar }}
+          />
+        )}
+      </Container>
+    </Box>
   );
 }

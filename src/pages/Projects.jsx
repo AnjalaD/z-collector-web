@@ -1,24 +1,10 @@
-import {
-  Chip,
-  Box,
-  Button,
-  Card,
-  Container,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Chip, Box, Card, Container, Stack, Typography } from "@mui/material";
 import { getAuth } from "firebase/auth";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "..";
+import Nav from "../components/Nav";
 
 function ProjectCard({ project }) {
   const navigate = useNavigate();
@@ -56,15 +42,9 @@ function ProjectCard({ project }) {
 }
 
 export default function Projects() {
-  const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
 
   const auth = getAuth();
-
-  const logout = () => {
-    auth.signOut();
-    navigate("/");
-  };
 
   useEffect(() => {
     const getProjects = async () => {
@@ -92,10 +72,9 @@ export default function Projects() {
         minHeight: "100vh",
       }}
     >
+      <Nav />
+
       <Container maxWidth="md">
-        <Button variant="contained" color="primary" onClick={logout}>
-          Logout
-        </Button>
         <Stack direction="column" spacing={2}>
           <Typography variant="h3" align="center">
             Projects
