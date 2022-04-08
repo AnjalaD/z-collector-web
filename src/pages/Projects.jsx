@@ -68,9 +68,9 @@ export default function Projects() {
 
   useEffect(() => {
     const getProjects = async () => {
-      const userRef = getDoc(doc(db, "users", auth.currentUser.uid));
+      const userRef = doc(db, "users", auth.currentUser.uid);
       const ref = collection(db, "projects");
-      const w = where("isPublished", "==", true);
+      const w = where("owner", "==", userRef);
       const q = query(ref, w);
       const snap = await getDocs(q);
       if (!snap.empty) {
